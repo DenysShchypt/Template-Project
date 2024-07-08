@@ -4,13 +4,13 @@ services:
     image: my-frontend
     restart: always
     ports:
-      - 5173:5173
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
 
   backend:
     image: my-backend
     restart: always
     ports:
-      - 3030:3030
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     depends_on:
       - postgres
 
@@ -18,11 +18,11 @@ services:
     image: postgres
     container_name: template
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=Denys7227221
-      - POSTGRES_DB=postgres-nest
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     restart: always
 
   redis:
